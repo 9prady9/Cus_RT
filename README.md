@@ -1,4 +1,3 @@
-
 scene_properties.xml is used to describe the following properties of the scene. Each tag explains how it pertains to the scene.
 
 
