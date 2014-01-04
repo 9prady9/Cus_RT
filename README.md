@@ -81,36 +81,42 @@ objects.xml is used to describe the various objects in the scene.
         		MaterialType="[ diffusive | emissive | refractive | reflective ]"
         		TexTureType="[ SOLID | IMAGE | PROCEDURE ]"
         		neta="refractive index of the material">
+        		
         		<!--
         		SOLID - [made available for future implementation]
         		IMAGE - traditional image texturing.
         		PROCEDURE - currently, default JuliaSet is available.
         					More are to come in future.
         		-->
+        		
         		<motion speed="distance metric/second">
         			<direction x="" y="" z=""/>
         		</motion>
+        		
         		<scale x="" y="" z=""/>
+        		
         		<color red="0 to 1" green="" blue=""/> 
-        		<!-- 'texFile' element is required if TextureType="IMAGE" -->
+        		
+        		<!-- 'texFile' is required if TextureType="IMAGE" -->
         		<texFile><!--location--></texFile>
-        		<!-- 'objFile' element is required if type="Mesh" -->
+        		
+        		<!-- 'objFile' is required if type="Mesh" -->
         		<objFile><!--location--></objFile>
-        		<!-- 'haxis' and 'vaxis' elements are required if
-        				type="[Plane|Sphere|Quadric]" -->
-        		<haxis x="" y="" z=""/>   <!--direction-->
-        		<vaxis x="" y="" z=""/>   <!--direction-->
-        		<!-- 'normal' and 'point' elements are required if
-        				type="Plane" -->
-        		<normal x="" y="" z=""/>  <!--direction-->
+        		
+        		<!-- 'haxis' and 'vaxis' are required if type="[Plane|Sphere|Quadric]" -->
+        		<haxis x="" y="" z=""/>
+        		<vaxis x="" y="" z=""/>
+        		
+        		<!-- 'normal' and 'point' are required if type="Plane" -->
+        		<normal x="" y="" z=""/>
         		<point x="" y="" z=""/>
-        		<!-- 'center' and 'radius' elements are required if
-        				type="Sphere" -->
+        		
+        		<!-- 'center' and 'radius' are required if type="Sphere" -->
         		<center x="" y="" z=""/>
         		<radius><!--value--></radius>
-        		<!-- 'aValues' & 'point' elements are required if
-        				type="Quadric" -->
-        		<point x="" y="" z=""/>   <!--position-->
+        		
+        		<!-- 'aValues' & 'point' are required if type="Quadric" -->
+        		<point x="" y="" z=""/>
         		<aValues a02="" a12="" a22="" a01=""  a11="" a21=""  a00=""/>
         		<!--
         		Quadric general equation is F(x) = A*x^2 + B*x + C = 0
