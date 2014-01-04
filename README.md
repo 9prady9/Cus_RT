@@ -1,41 +1,79 @@
+Note: All distances in the property files should follow same metric unit, otherwise undefined results will appear in the
+rendering.
+
 scene_properties.xml is used to describe the following properties of the scene. Each tag explains how it pertains to the scene.
 
-
-        <targetImage> - Output file name, location, resolution and antialiasing resolution.
+	<Scene>
+		<targetImage name="filename" outputDirectory="location">
+			<resolution width="image width" height="image height"/>
+			<antiAlias m="horizontal supersampling" n="vertical supersampling"/>
+		</targetImage>
+		
+		<viewPlane sx="width scale" sy="height scale" eyeToViewPlane="distance"/>
+	
+		<camera> - position, orientation parameters of camera in 3d space
+			<eye x="" y="" z=""/>
+			<lookAt  x="" y="" z=""/>
+			<up  x="" y="" z=""/>             <!--direction-->
+		</camera>
         
-        <viewPlane> - attributes are width and height scale of view plane and distance to view from eye.
+        <pointLights count="# of point lights">
+                <light sno="kind of identification #">
+                        <position  x="" y="" z=""/>
+                        <color  red="0 to 1" green="" blue=""/>
+                </light>
+        </pointLights>
         
-        <camera> - positions of the eye, target, and up of the camera.
+        <areaLights count="# of square area lights">
+        	<ALight sno="kind of identification #">
+        		<center  x="" y="" z=""/>
+        		<horizontal  x="" y="" z=""/> <!--direction-->
+        		<vertical  x="" y="" z=""/>   <!--direction-->
+        		<samples hSamples="horizontal" vSamples="vertical"/>
+        		<color  red="0 to 1" green="" blue=""/>
+        	</ALight>
+        </areaLights>
         
-        <pointLights> - contains the list of point light sources in the scene.
+        <specularLight phongExponent="">
+        	<color red="0 to 1" green="" blue=""/>
+        </specularLight>
         
-        <light> - position and color of each point light source.
+        <ambientLight intensity="kind of amplification factor">
+        	<color red="0 to 1" green="" blue=""/>
+        </ambientLight>
         
-        <areaLights> - contains the list of area light sources in the scene, all area lights are in square shape.
-        
-        <alight> - position, orientation and color of the area light. It also specifies number of point lights 
-                   samples in horizontal and vertical direction are used to simulate the area light effect.
-                   
-        <specularLight> - phong factor and the color of specular reflections
-        
-        <ambientLight> - intensity and color of ambient light in the scene
-        
-        <goochGooch> - Gooch shading factors for warm and cool colors.
-        
-        <reflection> - describes numer of times a ray is traced along reflected direction.
-        
-        <refraction> - describes numer of times a ray is traced along refracted direction.
-        
-        <DOF> - Depth of field effect parameters like focallength, aperture diameter and num of rays used to sample the effect.
-        
-        <ambientOcclusion> - HitEffectiveDistance: maximum distance between objects from which they start occluding each other
-                            radialSource: file containing list of vectors along which occlusion is sampled.
-                            
-        <envMap> - environment is mapped to provide illusion of surroundings. Two types are available: spherical and cube
+        <goochGooch>
+    		<cool factor="">
+	  			<color red="0 to 1" green="" blue=""/>
+			</cool>
+			<warm factor="">
+	  			<color red="0 to 1" green="" blue=""/>
+			</warm>
+		</goochGooch>
+		
+		<reflection depth="ray tracing depth" intensity="global factor, convience sake" />
+			
+		<refraction depth="ray tracing depth" intensity="global factor, convience sake" />
+		
+		<DOF focalLength="" apertureDiameter="" numOfRays="" />
+		
+		<ambientOcclusion HitEffectiveDistance="" radialSource="location of radial map" />
+		
+        <envMap whichOne="[cubeMap|sphereMap]">
+        	<cubeMap>
+        		<posx></posx>
+        		<posx></posx>
+        		<posx></posx>
+        		<posx></posx>
+        		<posx></posx>
+        		<posx></posx>
+        	</cubeMap>
+        	<sphereMap> <!-- made available for future implementation -->
+        	</sphereMap>
+        </envMap>
         
                     <cubeMap> - textures representing all six sides of cube are provided as posx,negx,posy,negy,posz,negz
                     
-                    <sphereMap> - [made available for future implementation]
 
 
 
