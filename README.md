@@ -44,11 +44,11 @@ scene_properties.xml is used to describe the following properties of the scene. 
         
         <goochGooch>
     		<cool factor="">
-	  			<color red="0 to 1" green="" blue=""/>
-			</cool>
-			<warm factor="">
-	  			<color red="0 to 1" green="" blue=""/>
-			</warm>
+	  		<color red="0 to 1" green="" blue=""/>
+		</cool>
+		<warm factor="">
+	  		<color red="0 to 1" green="" blue=""/>
+		</warm>
 		</goochGooch>
 		
 		<reflection depth="ray tracing depth" intensity="global factor, convience sake" />
@@ -59,96 +59,93 @@ scene_properties.xml is used to describe the following properties of the scene. 
 		
 		<ambientOcclusion HitEffectiveDistance="" radialSource="location of radial map" />
 		
-        <envMap whichOne="[cubeMap|sphereMap]">
+        <envMap whichOne="[ cubeMap | sphereMap ]">
         	<cubeMap>
-        		<posx></posx>
-        		<posx></posx>
-        		<posx></posx>
-        		<posx></posx>
-        		<posx></posx>
-        		<posx></posx>
+        		<posx></posx> <!--location-->
+        		<negx></negx>
+        		<posy></posy>
+        		<negy></negy>
+        		<posz></posz>
+        		<negz></negz>
         	</cubeMap>
-        	<sphereMap> <!-- made available for future implementation -->
-        	</sphereMap>
+        	<!--sphereMap> made available for future implementation </sphereMap-->
         </envMap>
-        
-                    <cubeMap> - textures representing all six sides of cube are provided as posx,negx,posy,negy,posz,negz
-                    
-
-
-
-
+	</Scene>
 
 objects.xml is used to describe the various objects in the scene.
 
 
-        <objects> - list of objects in the scene, described using object tag. 
-                    There can be 4 types of objects: Plane | Sphere  Quadric | Mesh.
-                    Every <object> has common attributes like 'MaterialType', 'TextureType' and 'neta'.
-                    MaterialType = diffusive | emissive | refractive | reflective
-                    TextureType = SOLID | IMAGE | PROCEDURE
-                        SOLID - [made available for future implementation]
-                        IMAGE - traditional image texturing.
-                        PROCEDURE - currently, default JuliaSet is available. More are to come in future.
-                        
-                    <motion> - speed attribute and direction of the movement.
-                    
-                    <texFile> - location of texture file if TextureType is IMAGE
-                    
-                    <color> - default color of the surface of the object
-                    
-                    <objFile> - this tag is specified if object type="Mesh" to provide location of the OBJ file.    
-                    
-                    <haxis>,<vaxis> - can be used to produce shear in 2d for object types=Plane|Sphere|Quadric
-                    
-                    <scale> - can be used to scale object size
-                    
-                    
-        <object type="Plane" ... >
-        
-                    <normal> - normal of the plane
-                    
-                    <point> - point on a plane
-        
-                    
-        <object type="Sphere" ... >
-        
-                    <center> - center of the sphere
-                    
-                    <radius> - radius of the sphere
-        
-                    
-        <object type="Quadric" ... >
-                    
-                    <point> - location of the quadric in world coordinates
-
-                        Quadric general equation is F(x) = A*x^2 + B*x + C = 0
-                        Normal to Quadric is its gradient = DELTA(F(x)) / |DELTA(F(x))|
-                        Below are unit quadrics centered at origin with main axes in x and y dimensions
-                        x^2 + y^2 + z^2 - 1 = 0     is Ellipsoid
-                        x^2 + y^2 - 1 = 0, Z=[0,K]  is Cylinder
-                        x^2 + y^2 - z^2 = 0         is Cone
-                        x^2 + y^2 - z^2 - 1 = 0     is Hyperboloid
-                        x^2 + y^2 - z^2 + 1 = 0     is Hyperboloid(mirror to above one)
-                        x^2 + y^2 - z = 0           is Paraboloid
-                        Swapping dimensions will give variations of these basic shapes.
-                        Replacing x,y,z with (x-xc),(y-yc),(z-zc) respectively, will translate the object in world.
-                        All such equations can be represented using a single equation given below.
-                        SUM(ai2,i goes from 0 to 2) * xi^2 + SUM(ai1, i goes from 0 to 1) * xi + a00 = 0
-                        where xi = x0 | x1 | x2 each representing the dimensions of 3D space.
-                        Please see below for an example of how values of a02,a12,a22, a01, a11, a21, a00 
-                        dictates the shape of the quadrics given above.
-                        ----------------------------------------------------------
-                        Shape        a02    a12    a22    a01    a11    a21    a00
-                        ----------------------------------------------------------
-                        Plane        0      0      0      0      0      1      0
-                        Ellipsoid    1      1      1      0      0      0      -1
-                        Cylinder     1      1      0      0      0      0      -1
-                        Cone         1      1      -1     0      0      0      0
-                        Hyperboloid  1      1      -1     0      0      0      -1
-                        Hyperboloid  1      1      -1     0      0      0      +1
-                        Paraboloid   1      1      0      0      0      1      0
-                        ----------------------------------------------------------
-                        
-                    <aValues> - a02,a12,a22, a01, a11, a21, a00
-                
+	<objects> <!--Root element in the xml. Lists the objects in the scene,
+				described using object tag-->
+		<object type="[ Plane | Sphere | Quadric | Mesh ]"
+        		MaterialType="[ diffusive | emissive | refractive | reflective ]"
+        		TexTureType="[ SOLID | IMAGE | PROCEDURE ]"
+        		neta="refractive index of the material">
+        		<!--
+        		SOLID - [made available for future implementation]
+        		IMAGE - traditional image texturing.
+        		PROCEDURE - currently, default JuliaSet is available.
+        					More are to come in future.
+        		-->
+        		<motion speed="distance metric/second">
+        			<direction x="" y="" z=""/>
+        		</motion>
+        		<scale x="" y="" z=""/>
+        		<color red="0 to 1" green="" blue=""/> 
+        		<!-- 'texFile' element is required if TextureType="IMAGE" -->
+        		<texFile><!--location--></texFile>
+        		<!-- 'objFile' element is required if type="Mesh" -->
+        		<objFile><!--location--></objFile>
+        		<!-- 'haxis' and 'vaxis' elements are required if
+        				type="[Plane|Sphere|Quadric]" -->
+        		<haxis x="" y="" z=""/>   <!--direction-->
+        		<vaxis x="" y="" z=""/>   <!--direction-->
+        		<!-- 'normal' and 'point' elements are required if
+        				type="Plane" -->
+        		<normal x="" y="" z=""/>  <!--direction-->
+        		<point x="" y="" z=""/>
+        		<!-- 'center' and 'radius' elements are required if
+        				type="Sphere" -->
+        		<center x="" y="" z=""/>
+        		<radius><!--value--></radius>
+        		<!-- 'aValues' & 'point' elements are required if
+        				type="Quadric" -->
+        		<point x="" y="" z=""/>   <!--position-->
+        		<aValues a02="" a12="" a22="" a01=""  a11="" a21=""  a00=""/>
+        		<!--
+        		Quadric general equation is F(x) = A*x^2 + B*x + C = 0
+        		Normal to Quadric is its gradient = DELTA(F(x)) / |DELTA(F(x))|
+        		
+        		Below are unit quadrics centered at origin
+        		with main axes in x and y dimensions
+        			x^2 + y^2 + z^2 - 1 = 0     is Ellipsoid
+        			x^2 + y^2 - 1 = 0, Z=[0,K]  is Cylinder
+        			x^2 + y^2 - z^2 = 0         is Cone
+        			x^2 + y^2 - z^2 - 1 = 0     is Hyperboloid
+        			x^2 + y^2 - z^2 + 1 = 0     is Hyperboloid(mirror to above one)
+        			x^2 + y^2 - z = 0           is Paraboloid
+        		
+        		Swapping dimensions will give variations of these basic shapes.
+        		Replacing x,y,z with (x-xc),(y-yc),(z-zc) respectively, will translate
+        		the object in world. All such equations can be represented using a 
+        		single equation given below. 
+        		
+        		SUM(ai2,i goes from 0 to 2) * xi^2 + SUM(ai1, i goes from 0 to 1) * xi + a00 = 0
+        		where xi = x0 | x1 | x2 each representing the dimensions of 3D space.
+        		
+        		Please see below for an example of how values of a02,a12,a22, a01, a11, a21, a00 
+        		dictates the shape of the quadrics given above.
+        		----------------------------------------------------------
+        		Shape        a02    a12    a22    a01    a11    a21    a00
+        		----------------------------------------------------------
+        		Plane        0      0      0      0      0      1      0
+        		Ellipsoid    1      1      1      0      0      0      -1
+        		Cylinder     1      1      0      0      0      0      -1
+        		Cone         1      1      -1     0      0      0      0
+        		Hyperboloid  1      1      -1     0      0      0      -1
+        		Hyperboloid  1      1      -1     0      0      0      +1
+        		Paraboloid   1      1      0      0      0      1      0
+        		----------------------------------------------------------
+        		-->
+        </object>
+	</objects>
