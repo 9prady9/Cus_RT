@@ -44,11 +44,11 @@ scene_properties.xml is used to describe the following properties of the scene. 
         
         <goochGooch>
     		<cool factor="">
-	  		<color red="0 to 1" green="" blue=""/>
-		</cool>
-		<warm factor="">
-	  		<color red="0 to 1" green="" blue=""/>
-		</warm>
+	  			<color red="0 to 1" green="" blue=""/>
+			</cool>
+			<warm factor="">
+	  			<color red="0 to 1" green="" blue=""/>
+			</warm>
 		</goochGooch>
 		
 		<reflection depth="ray tracing depth" intensity="global factor, convience sake" />
@@ -118,6 +118,7 @@ objects.xml is used to describe the various objects in the scene.
         		<!-- 'aValues' & 'point' are required if type="Quadric" -->
         		<point x="" y="" z=""/>
         		<aValues a02="" a12="" a22="" a01=""  a11="" a21=""  a00=""/>
+        		
         		<!--
         		Quadric general equation is F(x) = A*x^2 + B*x + C = 0
         		Normal to Quadric is its gradient = DELTA(F(x)) / |DELTA(F(x))|
